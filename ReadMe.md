@@ -1,5 +1,5 @@
 # gulp-electron-mocha
-> Run client-side Mocha tests in electron
+> Run client-side Mocha tests in Electron
 
 This is a simple wrapper for [electron-mocha](https://github.com/jprichardson/electron-mocha).
 
@@ -42,7 +42,7 @@ is passed to electron-mocha.
 See [electron-mocha's docs](https://github.com/jprichardson/electron-mocha#run-tests)
 to know what parameters are available.
 
-gulp-electron-mocha uses [opject-to-spawn-args](https://github.com/75lb/object-to-spawn-args)
+gulp-electron-mocha uses [object-to-spawn-args](https://github.com/75lb/object-to-spawn-args)
 to convert from JavaScript object to command-line argument string.
 
 ```javascript
@@ -87,6 +87,7 @@ gulp.src('./test', { read: false })
 #### options
 
 - electronPath
+
   | Type | Default |
   |:----:|:----:|
   | `string` | `undefined` |
@@ -95,6 +96,7 @@ gulp.src('./test', { read: false })
   If not specified, use Electron in `node_modules` instead.
 
 - silent
+
   | Type | Default |
   |:----:|:----:|
   | `bool` | `false` |
@@ -102,6 +104,7 @@ gulp.src('./test', { read: false })
   Don't throw an error even if a test is failed.
 
 - suppressStdout
+
   | Type | Default |
   |:----:|:----:|
   | `bool` | `false` |
@@ -109,6 +112,7 @@ gulp.src('./test', { read: false })
   Don't redirect electron-mocha's stdout to the console.
 
 - suppressStderr
+
   | Type | Default |
   |:----:|:----:|
   | `bool` | `false` |
@@ -116,6 +120,7 @@ gulp.src('./test', { read: false })
   Don't redirect electron-mocha's stderr to the console.
 
 - electronMocha
+
   | Type | Default |
   |:----:|:----:|
   | `Object` | `{}` |
@@ -125,7 +130,7 @@ gulp.src('./test', { read: false })
   for more details.
 
   The value will be converted to command-line argument string with
-  [opject-to-spawn-args](https://github.com/75lb/object-to-spawn-args).
+  [object-to-spawn-args](https://github.com/75lb/object-to-spawn-args).
 
   For example, if you want to pass `--no-timeout --renderder -s 200 --compilers js:babel-core/register`,
   specify:
