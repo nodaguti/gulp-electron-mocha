@@ -1,0 +1,42 @@
+{
+  "name": "gulp-electron-mocha",
+  "version": "1.0.0",
+  "description": "Gulp plugin to run Mocha tests in Electron",
+  "author": "nodaguti",
+  "license": "MIT",
+  "main": "./lib/index.js",
+  "repository": "nodaguti/gulp-electron-mocha",
+  "scripts": {
+    "build": "babel src --out-dir lib --source-maps",
+    "watch": "babel src --out-dir lib --watch --source-maps",
+    "prepublish": "npm run --if-present build",
+    "test": "gulp test"
+  },
+  "keywords": [
+    "gulpplugin",
+    "mocha",
+    "electron"
+  ],
+  "dependencies": {
+    "electron-mocha": "^0.6.3",
+    "electron-prebuilt": "^0.35.4",
+    "fs-promise": "^0.3.1",
+    "gulp-util": "^3.0.7",
+    "object-assign": "^4.0.1",
+    "object-to-spawn-args": "^0.1.2",
+    "through2": "^2.0.0"
+  },
+  "devDependencies": {
+    "babel-cli": "^6.3.17",
+    "babel-plugin-espower": "^2.0.0",
+    "babel-plugin-transform-runtime": "^6.3.13",
+    "babel-preset-es2015": "^6.3.13",
+    "babel-preset-stage-2": "^6.3.13",
+    "babel-register": "^6.3.13",
+    "espower-babel": "^4.0.0",
+    "gulp": "^3.9.0",
+    "gulp-mocha": "^2.2.0",
+    "power-assert": "^1.2.0",
+    "run-sequence": "^1.1.5"
+  }
+}
