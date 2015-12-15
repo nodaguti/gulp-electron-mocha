@@ -12,7 +12,7 @@ The implementations are mostly inspired by [gulp-mocha-phantomjs](https://github
 npm install --save-dev gulp-electron-mocha
 ```
 
-Note that you don't have to install neither electron-mocha nor electron-prebuilt globally (i.e. with `npm i -g`).
+Note that you don't have to install either electron-mocha or electron-prebuilt globally (i.e. with `npm i -g`).
 All dependencies are resolved automatically.
 
 
@@ -31,7 +31,9 @@ gulp.task('test', () =>
 Please be aware that you should write `gulp.src('./test')`, not `gulp.src('./test/*.js')`,
 because electron-mocha requires a directory to test.
 
-You can find working tests in `gulpfile.babel.js` and `spec/electronMocha`.
+You can also find working tests in [gulpfile.babel.js](https://github.com/nodaguti/gulp-electron-mocha/blob/master/gulpfile.babel.js)
+and [spec/electronMocha](https://github.com/nodaguti/gulp-electron-mocha/tree/master/spec/electronMocha)
+to learn how to make gulp tasks and client-side Mocha tests with the plugin.
 
 
 ## Passing additional options to electron-mocha
