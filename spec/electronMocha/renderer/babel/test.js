@@ -2,12 +2,6 @@ import assert from 'power-assert';
 import path from 'path';
 
 describe('Renderer process of Electron', () => {
-  // Make sure closing the window after running all tests.
-  // (maybe this is a bug in electron-mocha?)
-  after(() => {
-    window.close();
-  });
-
   it('can assert 1+1 is 2', () => {
     assert(1+1 === 2);
   });

@@ -1,12 +1,6 @@
 var assert = require('assert');
 
 describe('Renderer process of Electron', function() {
-  // Make sure closing the window after running all tests.
-  // (maybe this is a bug in electron-mocha?)
-  after(function() {
-    window.close();
-  });
-
   it('can assert 1+1 is 2', function() {
     assert(1+1 === 2);
   });
