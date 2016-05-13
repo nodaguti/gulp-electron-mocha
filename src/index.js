@@ -11,7 +11,7 @@ const pluginName = require('../package.json').name;
 
 export default function (opts = {}) {
   const electronPath = opts.electronPath || getElectronPath();
-  const electronMochaPath = lookup('electron-mocha/bin/electron-mocha', true);
+  const electronMochaPath = lookup('electron-mocha/bin/electron-mocha', false);
 
   if (!electronPath) {
     throw new PluginError(pluginName, 'Cannot find electron.');
@@ -29,7 +29,6 @@ export default function (opts = {}) {
       electron: electronPath,
       file: file.path,
     };
-
     spawnElectronMocha(paths, opts, this, (err) => {
       if (err) {
         return cb(err);
@@ -43,13 +42,14 @@ export default function (opts = {}) {
 
 function getElectronPath() {
   const electronPathFile = lookup('electron-prebuilt/path.txt');
-  return fs.readFileSync(electronPathFile, 'utf8');
+  var electronExecPath = fs.readFileSync(electronPathFile, 'utf8');
+  return lookup(path.join('electron-prebuilt',electronExecPath));
 }
 
 function spawnElectronMocha(paths, opts, stream, cb) {
-  const args = [...opts.electronMocha, paths.file];
+  const args = [paths.electronMocha, ...opts.electronMocha, paths.file];
   const env = assign(process.env, { 'ELECTRON_PATH': paths.electron });
-  const electronMocha = spawn(paths.electronMocha, args, { env });
+  const electronMocha = spawn(process.argv[0], args, { env });
 
   if (!opts.suppressStdout) {
     electronMocha.stdout.pipe(process.stdout);
