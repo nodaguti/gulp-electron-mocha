@@ -9,36 +9,28 @@ import gutil from 'gulp-util';
 const PluginError = gutil.PluginError;
 const pluginName = require('../package.json').name;
 
-export default function (opts = {}) {
-  const electronPath = opts.electronPath || getElectronPath();
-  const electronMochaPath = lookup('electron-mocha/bin/electron-mocha', true);
+export function lookup(pathToLookup, isExecutable) {
+  const iz = module.paths.length;
 
-  if (!electronPath) {
-    throw new PluginError(pluginName, 'Cannot find electron.');
-  }
+  for (let i = 0; i < iz; i++) {
+    let absPath = path.join(module.paths[i], pathToLookup);
 
-  if (!electronMochaPath) {
-    throw new PluginError(pluginName, 'Cannot find electron-mocha.');
-  }
+    if (isExecutable && process.platform === 'win32') {
+      absPath += '.cmd';
+    }
 
-  opts.electronMocha = toSpawnArgs(opts.electronMocha || {});
+    try {
+      const stat = fs.statSync(absPath);
 
-  return through.obj(function(file, enc, cb) {
-    const paths = {
-      electronMocha: electronMochaPath,
-      electron: electronPath,
-      file: file.path,
-    };
-
-    spawnElectronMocha(paths, opts, this, (err) => {
-      if (err) {
-        return cb(err);
+      if (stat) {
+        return absPath;
       }
+    } catch (err) {
+      continue;
+    }
+  }
 
-      this.push(file);
-      cb();
-    });
-  });
+  return '';
 }
 
 function getElectronPath() {
@@ -48,7 +40,7 @@ function getElectronPath() {
 
 function spawnElectronMocha(paths, opts, stream, cb) {
   const args = [...opts.electronMocha, paths.file];
-  const env = assign(process.env, { 'ELECTRON_PATH': paths.electron });
+  const env = assign(process.env, { ELECTRON_PATH: paths.electron });
   const electronMocha = spawn(paths.electronMocha, args, { env });
 
   if (!opts.suppressStdout) {
@@ -68,39 +60,50 @@ function spawnElectronMocha(paths, opts, stream, cb) {
   electronMocha.on('error', stream.emit.bind(stream, 'electronMochaError'));
   electronMocha.on('exit', stream.emit.bind(stream, 'electronMochaExit'));
 
-  electronMocha.on('error', function (err) {
-      cb(new gutil.PluginError(pluginName, err.message));
+  electronMocha.on('error', (err) => {
+    cb(new gutil.PluginError(pluginName, err.message));
   });
 
-  electronMocha.on('exit', function (code) {
+  electronMocha.on('exit', (code) => {
     if (code === 0 || opts.silent) {
       cb();
     } else {
-      cb(new gutil.PluginError(pluginName, 'Test failed. electronMocha exit code: ' + code));
+      cb(new gutil.PluginError(pluginName, `Test failed. electronMocha exit code: ${code}`));
     }
   });
 }
 
-export function lookup(pathToLookup, isExecutable) {
-  const iz = module.paths.length;
+export default function (opts = {}) {
+  const electronPath = opts.electronPath || getElectronPath();
+  const electronMochaPath = lookup('electron-mocha/bin/electron-mocha', true);
 
-  for (let i = 0; i < iz; i++) {
-    let absPath = path.join(module.paths[i], pathToLookup);
-
-    if (isExecutable && process.platform === 'win32') {
-      absPath += '.cmd';
-    }
-
-    try {
-      const stat = fs.statSync(absPath);
-
-      if (stat) {
-        return absPath;
-      }
-    } catch(err) {
-      continue;
-    }
+  if (!electronPath) {
+    throw new PluginError(pluginName, 'Cannot find electron.');
   }
 
-  return '';
+  if (!electronMochaPath) {
+    throw new PluginError(pluginName, 'Cannot find electron-mocha.');
+  }
+
+  // We intentionally reassign to the func param in order to spawn args.
+  // eslint-disable-next-line no-param-reassign
+  opts.electronMocha = toSpawnArgs(opts.electronMocha || {});
+
+  return through.obj(function spawnProcess(file, enc, cb) {
+    const paths = {
+      electronMocha: electronMochaPath,
+      electron: electronPath,
+      file: file.path,
+    };
+
+    spawnElectronMocha(paths, opts, this, (err) => {
+      if (err) {
+        cb(err);
+        return;
+      }
+
+      this.push(file);
+      cb();
+    });
+  });
 }

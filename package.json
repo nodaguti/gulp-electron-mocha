@@ -8,9 +8,11 @@
   "repository": "nodaguti/gulp-electron-mocha",
   "scripts": {
     "build": "babel src --out-dir lib --source-maps",
-    "watch": "babel src --out-dir lib --watch --source-maps",
     "prepublish": "npm run --if-present build",
-    "test": "gulp test"
+    "test": "npm-run-all lint test:unit test:electronMocha",
+    "lint": "eslint src test",
+    "test:unit": "mocha test/unit",
+    "test:electronMocha": "mocha test/electronMocha/test.js --timeout 12000"
   },
   "keywords": [
     "gulpplugin",
@@ -28,15 +30,16 @@
   },
   "devDependencies": {
     "babel-cli": "^6.3.17",
-    "babel-plugin-espower": "^2.0.0",
+    "babel-eslint": "^6.0.4",
+    "babel-plugin-async-to-promises": "^1.0.5",
+    "babel-plugin-espower": "^2.2.0",
     "babel-plugin-transform-runtime": "^6.3.13",
     "babel-preset-es2015": "^6.3.13",
-    "babel-preset-stage-2": "^6.3.13",
-    "babel-register": "^6.3.13",
-    "espower-babel": "^4.0.0",
+    "eslint": "^2.12.0",
+    "eslint-config-airbnb": "^9.0.1",
+    "eslint-plugin-import": "^1.8.1",
     "gulp": "^3.9.0",
-    "gulp-mocha": "^2.2.0",
-    "power-assert": "^1.2.0",
-    "run-sequence": "^1.1.5"
+    "npm-run-all": "^2.1.2",
+    "power-assert": "^1.2.0"
   }
 }

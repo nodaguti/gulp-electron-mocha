@@ -1,9 +1,5 @@
-// Since `new Mocha(opts)` does not support the `--compilers` option,
-// we have to use require hook here to compile espowered ES6 code.
-require('babel-core/register');
-
+import { lookup } from '../../lib/index.js';
 import assert from 'power-assert';
-import electronMocha, { lookup } from '../../lib/index.js';
 
 describe('lookup()', () => {
   it('can find a non-executable file', () => {

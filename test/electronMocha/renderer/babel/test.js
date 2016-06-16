@@ -3,7 +3,7 @@ import path from 'path';
 
 describe('Renderer process of Electron', () => {
   it('can assert 1+1 is 2', () => {
-    assert(1+1 === 2);
+    assert(1 + 1 === 2);
   });
 
   it('can execute an async/await test', (done) => {
@@ -41,13 +41,13 @@ describe('Renderer process of Electron', () => {
 
       try {
         assert(iframe.contentWindow.countDivs() === 4);
-      } catch(_err) {
+      } catch (_err) {
         err = _err;
       } finally {
         assert(err === undefined);
         done();
       }
-    }
+    };
 
     document.body.appendChild(iframe);
   });

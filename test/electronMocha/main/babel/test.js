@@ -1,8 +1,9 @@
+/* eslint-disable global-require, import/no-unresolved */
 import assert from 'power-assert';
 
 describe('Main process of Electron', () => {
   it('can assert 1+1 is 2', () => {
-    assert(1+1 === 2);
+    assert(1 + 1 === 2);
   });
 
   it('can execute an async/await test', (done) => {
@@ -31,7 +32,7 @@ describe('Main process of Electron', () => {
       const BrowserWindow = require('electron').BrowserWindow;
       const win = new BrowserWindow({ width: 800, height: 600, show: false });
       win.close();
-    } catch(_err) {
+    } catch (_err) {
       err = _err;
     } finally {
       assert(err === undefined);
