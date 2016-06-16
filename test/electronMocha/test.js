@@ -1,5 +1,5 @@
 import assert from 'power-assert';
-import { spawn } from 'child_process';
+import spawn from 'cross-spawn';
 import through from 'through2';
 import path from 'path';
 

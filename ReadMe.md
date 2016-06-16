@@ -2,6 +2,7 @@
 > Run client-side Mocha tests in Electron
 
 [![Build Status](https://travis-ci.org/nodaguti/gulp-electron-mocha.svg?branch=master)](https://travis-ci.org/nodaguti/gulp-electron-mocha)
+[![Build Status](https://ci.appveyor.com/api/projects/status/github/gulp-electron-mocha?svg=true)](https://ci.appveyor.com/project/nodaguti/gulp-electron-mocha)
 [![Dependency Status](https://david-dm.org/nodaguti/gulp-electron-mocha.svg)](https://david-dm.org/nodaguti/gulp-electron-mocha)
 [![devDependency Status](https://david-dm.org/nodaguti/gulp-electron-mocha/dev-status.svg)](https://david-dm.org/nodaguti/gulp-electron-mocha#info=devDependencies)
 
@@ -168,6 +169,19 @@ electronMocha.on('error', stream.emit.bind(stream, 'electronMochaError'));
 electronMocha.on('exit', stream.emit.bind(stream, 'electronMochaExit'));
 ```
 
+## Tests
+```
+npm test
+```
+
+## Contribution
+
+1. Fork it!
+2. Create your feature branch: `git checkout -b my-new-feature`
+3. Commit your changes: `git commit -am 'Add some feature'`
+4. Push to the branch: `git push origin my-new-feature`
+5. Submit a pull request :D
+
 ## License
 
-MIT License
+MIT License (http://nodaguti.mit-license.org/)

@@ -1,6 +1,6 @@
 import fs from 'fs-promise';
 import through from 'through2';
-import { spawn } from 'child_process';
+import spawn from 'cross-spawn';
 import path from 'path';
 import assign from 'object-assign';
 import toSpawnArgs from 'object-to-spawn-args';
@@ -9,15 +9,11 @@ import gutil from 'gulp-util';
 const PluginError = gutil.PluginError;
 const pluginName = require('../package.json').name;
 
-export function lookup(pathToLookup, isExecutable) {
+export function lookup(pathToLookup) {
   const iz = module.paths.length;
 
   for (let i = 0; i < iz; i++) {
-    let absPath = path.join(module.paths[i], pathToLookup);
-
-    if (isExecutable && process.platform === 'win32') {
-      absPath += '.cmd';
-    }
+    const absPath = path.join(module.paths[i], pathToLookup);
 
     try {
       const stat = fs.statSync(absPath);
@@ -35,13 +31,14 @@ export function lookup(pathToLookup, isExecutable) {
 
 function getElectronPath() {
   const electronPathFile = lookup('electron-prebuilt/path.txt');
-  return fs.readFileSync(electronPathFile, 'utf8');
+  const electronExecPath = fs.readFileSync(electronPathFile, 'utf8');
+  return lookup(path.join('electron-prebuilt', electronExecPath));
 }
 
 function spawnElectronMocha(paths, opts, stream, cb) {
-  const args = [...opts.electronMocha, paths.file];
+  const args = [paths.electronMocha, ...opts.electronMocha, paths.file];
   const env = assign(process.env, { ELECTRON_PATH: paths.electron });
-  const electronMocha = spawn(paths.electronMocha, args, { env });
+  const electronMocha = spawn(process.argv[0], args, { env });
 
   if (!opts.suppressStdout) {
     electronMocha.stdout.pipe(process.stdout);
@@ -75,7 +72,7 @@ function spawnElectronMocha(paths, opts, stream, cb) {
 
 export default function (opts = {}) {
   const electronPath = opts.electronPath || getElectronPath();
-  const electronMochaPath = lookup('electron-mocha/bin/electron-mocha', true);
+  const electronMochaPath = lookup('electron-mocha/bin/electron-mocha');
 
   if (!electronPath) {
     throw new PluginError(pluginName, 'Cannot find electron.');

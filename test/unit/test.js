@@ -6,7 +6,7 @@ describe('lookup()', () => {
     const path = lookup('gulp/index.js');
 
     assert(typeof path === 'string');
-    assert(path.indexOf('gulp/index.js') > -1);
+    assert(/gulp.index\.js$/.test(path) === true);
   });
 
   it('can find an executable file', () => {
