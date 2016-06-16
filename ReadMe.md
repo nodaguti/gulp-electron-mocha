@@ -1,6 +1,10 @@
 # gulp-electron-mocha
 > Run client-side Mocha tests in Electron
 
+[![Build Status](https://travis-ci.org/nodaguti/gulp-electron-mocha.svg?branch=master)](https://travis-ci.org/nodaguti/gulp-electron-mocha)
+[![Dependency Status](https://david-dm.org/nodaguti/gulp-electron-mocha.svg)](https://david-dm.org/nodaguti/gulp-electron-mocha)
+[![devDependency Status](https://david-dm.org/nodaguti/gulp-electron-mocha/dev-status.svg)](https://david-dm.org/nodaguti/gulp-electron-mocha#info=devDependencies)
+
 This is a simple wrapper for [electron-mocha](https://github.com/jprichardson/electron-mocha).
 
 The implementations are mostly inspired by [gulp-mocha-phantomjs](https://github.com/mrhooray/gulp-mocha-phantomjs).
