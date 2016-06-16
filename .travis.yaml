@@ -1,0 +1,16 @@
+sudo: false
+language: node_js
+node_js:
+  - 5
+  - 6
+addons:
+  apt:
+    packages:
+      - xvfb
+install:
+  - export DISPLAY=':99.0'
+  - Xvfb :99 -screen 0 1024x768x24 > /dev/null 2>&1 &
+  - npm install
+notification:
+  slack:
+    secure: "zjib14F444WAl80VEmkFU0Mw0nCQcQ58NK911jxCqq6SdW3d8y/RrWWYImzyO61NQEZsgy0yJr4qRYZGJoFhlfFAw1VSPY9lutiWTy8PAFRZOugGdME/uN/jUmemjNjLkwCgKAQs5LSHZccgXdcDTug4yxzVfDv5jGSE43dp4q4F/n0VPrVm0ZhmVael6d0RDsofXaqBii+Hjq004oQcgOi2j+tlfE+GK6svBA+gO9ociK4TuTnDgG/k/iKFIWESDk/kZGz+PBMbqMh7FwOrSKpO5WmrC+T38Xiy2eREhMiEau60lm4q8IMgnqUxx4DaXoU2WfAnB8Yp4QNTOdj8vfnO9Rp2QiSaCh2W7roZQeZtGpa15k2ODBXeZNe7FwQt1ARTXN/++hyZW7ZP+rN/tNGNzCQE7+mggvv0tzCdzyV/tIoWMfCM9IJh9eed/cC66YmoB6+vkxzm6eT9/QYkEG6bnNa3MOS5/WNEbpZVBi8JamSezJCoEn8lgGbNsrNwgDUlUm49uXFLyHPyTQzwN7lsnYkzA3+fSZ3F6PFGjVK8HlH/Skpmcm80dwPM26oMBSoSNM9e5DrIZVTjX+pj3Ytmehe8twXgL/VBWKiHnRXqsKy4Gd2TeWWe8uJcrD2ByKn2RAk4AYN5+tb7a9UWNgxS2ink3RXNdUrPftXZwZE="
