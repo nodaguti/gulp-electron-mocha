@@ -1,6 +1,6 @@
 import fs from 'fs-promise';
 import through from 'through2';
-import { spawn } from 'child_process';
+import spawn from 'cross-spawn';
 import path from 'path';
 import assign from 'object-assign';
 import toSpawnArgs from 'object-to-spawn-args';
