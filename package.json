@@ -14,7 +14,7 @@
     "test": "npm-run-all lint test:unit test:electronMocha",
     "lint": "eslint src test",
     "test:unit": "mocha test/unit",
-    "test:electronMocha": "mocha test/electronMocha/test.js --timeout 12000"
+    "test:electronMocha": "mocha test/electronMocha/test.js"
   },
   "keywords": [
     "gulpplugin",
