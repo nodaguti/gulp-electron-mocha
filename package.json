@@ -6,6 +6,10 @@
   "license": "MIT",
   "main": "./lib/index.js",
   "repository": "nodaguti/gulp-electron-mocha",
+  "files": [
+    "src/",
+    "lib/"
+  ],
   "scripts": {
     "build": "npm-run-all clean babel",
     "babel": "babel src --out-dir lib --source-maps",
