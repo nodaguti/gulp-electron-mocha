@@ -1,6 +1,6 @@
 {
   "name": "gulp-electron-mocha",
-  "version": "1.2.2",
+  "version": "1.2.3",
   "description": "Gulp plugin to run Mocha tests in Electron",
   "author": "nodaguti",
   "license": "MIT",
