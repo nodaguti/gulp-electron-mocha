@@ -1,5 +1,5 @@
-import { lookup } from '../../lib/index.js';
 import assert from 'power-assert';
+import { lookup } from '../../lib/index';
 
 describe('lookup()', () => {
   it('can find a non-executable file', () => {

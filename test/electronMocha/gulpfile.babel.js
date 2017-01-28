@@ -18,7 +18,7 @@ gulp.task('test:main:basic', () =>
       electronMocha: {
         timeout: 30000,
       },
-    }))
+    })),
 );
 
 gulp.task('test:main:babel', () =>
@@ -28,7 +28,7 @@ gulp.task('test:main:babel', () =>
         compilers: 'js:babel-core/register',
         timeout: 30000,
       },
-    }))
+    })),
 );
 
 gulp.task('test:renderer:basic', () =>
@@ -38,7 +38,7 @@ gulp.task('test:renderer:basic', () =>
         renderer: true,
         timeout: 30000,
       },
-    }))
+    })),
 );
 
 gulp.task('test:renderer:babel', () =>
@@ -49,7 +49,7 @@ gulp.task('test:renderer:babel', () =>
         compilers: 'js:babel-core/register',
         timeout: 30000,
       },
-    }))
+    })),
 );
 
 // Ensure nothing will happen when gulp is launched with no arguments.
