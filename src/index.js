@@ -12,17 +12,11 @@ const pluginName = require('../package.json').name;
 export function lookup(pathToLookup) {
   const iz = module.paths.length;
 
-  for (let i = 0; i < iz; i++) {
+  for (let i = 0; i < iz; i += 1) {
     const absPath = path.join(module.paths[i], pathToLookup);
 
-    try {
-      const stat = fs.statSync(absPath);
-
-      if (stat) {
-        return absPath;
-      }
-    } catch (err) {
-      continue;
+    if (fs.existsSync(absPath)) {
+      return absPath;
     }
   }
 
@@ -30,9 +24,9 @@ export function lookup(pathToLookup) {
 }
 
 function getElectronPath() {
-  const electronPathFile = lookup('electron-prebuilt/path.txt');
+  const electronPathFile = lookup('electron/path.txt');
   const electronExecPath = fs.readFileSync(electronPathFile, 'utf8');
-  return lookup(path.join('electron-prebuilt', electronExecPath));
+  return lookup(path.join('electron', electronExecPath));
 }
 
 function spawnElectronMocha(paths, opts, stream, cb) {

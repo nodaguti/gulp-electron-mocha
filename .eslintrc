@@ -1,4 +1,8 @@
 {
+  "root": true,
   "parser": "babel-eslint",
-  "extends": "eslint-config-airbnb/base"
+  "extends": "eslint-config-airbnb-base",
+  "rules": {
+    "arrow-parens": ["error", "always"]
+  }
 }
