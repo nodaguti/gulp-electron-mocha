@@ -29,7 +29,7 @@
     "cross-spawn": "^5.0.1",
     "electron": "^1.2.3",
     "electron-mocha": "^3.3.0",
-    "fs-promise": "^1.0.0",
+    "fs-promise": "^2.0.0",
     "gulp-util": "^3.0.7",
     "object-assign": "^4.1.0",
     "object-to-spawn-args": "^1.1.0",
